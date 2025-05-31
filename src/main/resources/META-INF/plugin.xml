@@ -1,0 +1,40 @@
+<idea-plugin>
+    <id>org.tracer.plugin</id>
+    <name>sql tracer</name>
+    <description>用于开发过程中打印mybatis sql</description>
+    <version>1.0</version>
+    <vendor>Your Name</vendor>
+
+    <description><![CDATA[
+      本项目通过 Java Agent 技术对运行中的 MyBatis 应用进行字节码增强，<br>
+      实现对所有执行的 SQL 语句的捕获和记录。可以将 SQL 输出到控制台或写入本地日志文件，便于调试、性能分析或审计用途。<br>
+    ]]></description>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- 依赖模块 -->
+    <depends>com.intellij.modules.platform</depends>
+    <!-- 同时需要引入,否则2020版本找不到 com.intellij.psi -->
+    <depends>com.intellij.modules.lang</depends>
+    <depends>com.intellij.modules.java</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <java.programPatcher implementation="org.tracer.agentinjector.AgentProbe"/>
+
+        <toolWindow id="Sql Tracer" anchor="bottom"
+                    icon="AllIcons.Toolwindows.ToolWindowInternal"
+                    canCloseContents="false"
+                    factoryClass="org.tracer.agentinjector.ui.SqlToolWindowFactory"/>
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+    </actions>
+    <!-- 注册为 Project Component -->
+<!--    <project-components>-->
+<!--        <component>-->
+<!--            <implementation-class>org.tracer.agentinjector.ui.SqlPluginStore</implementation-class>-->
+<!--        </component>-->
+<!--    </project-components>-->
+
+</idea-plugin>
