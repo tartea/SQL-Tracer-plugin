@@ -20,9 +20,15 @@ public final class SqlPluginStore implements PersistentStateComponent<SqlPluginS
     public boolean isFeatureEnabled() {
         return sqlPluginState.outputToConsole;
     }
+    public boolean isEnableUseAgent() {
+        return sqlPluginState.enableUseAgent;
+    }
 
     public void setFeatureEnabled(boolean enabled) {
         sqlPluginState.outputToConsole = enabled;
+    }
+    public void setEnableUseAgent(boolean enabled) {
+        sqlPluginState.enableUseAgent = enabled;
     }
 
     @Override

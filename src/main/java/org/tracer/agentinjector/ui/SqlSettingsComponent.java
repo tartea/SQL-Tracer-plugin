@@ -10,6 +10,7 @@ import java.awt.*;
 
 public class SqlSettingsComponent {
     private final JBCheckBox enableFeatureCheckBox = new JBCheckBox("控制台打印日志");
+    private final JBCheckBox enableUseAgentCheckBox = new JBCheckBox("开启sql tracer");
 
     private final JBTextField statusTextField = new JBTextField(20);
     private final JPanel panel;
@@ -23,13 +24,25 @@ public class SqlSettingsComponent {
 
         // 使用垂直布局
         panel = new JPanel();
-        panel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5)); // 左上对齐
+//        panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
+        panel.setLayout(new FlowLayout(FlowLayout.LEADING, 20, 20)); // 左上对齐
 
 
         // 创建一个垂直 Box，用于存放标题和 checkbox
         Box verticalBox = Box.createVerticalBox();
-        verticalBox.add(Box.createRigidArea(new Dimension(30, 10))); // 添加间距
+//        verticalBox.add(Box.createRigidArea(new Dimension(30, 20))); // 添加间距
+        verticalBox.setMaximumSize(new Dimension(Short.MAX_VALUE, 200)); // 高度 200px
         panel.add(verticalBox);
+
+        // 初始化 sql tracer 状态
+        boolean enableUseAgent = SqlPluginStore.getInstance(project).isEnableUseAgent();
+        enableUseAgentCheckBox.setSelected(enableUseAgent);
+        // 添加监听器，保存状态
+        enableUseAgentCheckBox.addItemListener(e -> {
+            boolean selected = e.getStateChange() == java.awt.event.ItemEvent.SELECTED;
+            SqlPluginStore.getInstance(project).setEnableUseAgent(selected);
+        });
+        verticalBox.add(enableUseAgentCheckBox);
 
         // 初始化 checkbox 状态
         boolean currentState = SqlPluginStore.getInstance(project).isFeatureEnabled();
@@ -41,7 +54,8 @@ public class SqlSettingsComponent {
         });
         verticalBox.add(enableFeatureCheckBox);
 
-        JPanel textPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        JPanel textPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        textPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
         textPanel.add(new JLabel("状态："));
         // 设置文本框为只读
         statusTextField.setEditable(false);
