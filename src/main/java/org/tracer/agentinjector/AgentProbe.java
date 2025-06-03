@@ -33,7 +33,8 @@ public class AgentProbe extends JavaProgramPatcher {
                     PsiClass mainClass = ((ApplicationConfiguration) runConfiguration).getMainClass();
                     if (Objects.nonNull(mainClass)) {
 
-                        if (mainClass.hasAnnotation("org.springframework.boot.autoconfigure.SpringBootApplication")) {
+                        if (mainClass.hasAnnotation("org.springframework.boot.autoconfigure.SpringBootApplication")
+                                || mainClass.hasAnnotation("org.springframework.cloud.client.SpringCloudApplication")) {
                             String agentCoreJarPath = PluginUtil.getAgentCoreJarPath();
 
                             if (StrUtil.isBlank(agentCoreJarPath)) {
