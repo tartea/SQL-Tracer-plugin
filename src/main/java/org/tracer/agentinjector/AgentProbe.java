@@ -10,7 +10,6 @@ import com.intellij.psi.PsiClass;
 import org.tracer.agentinjector.ui.SqlPluginStore;
 import org.tracer.agentinjector.ui.SqlSettingsComponent;
 import org.tracer.agentinjector.util.PluginUtil;
-import com.intellij.openapi.ui.Messages;
 import java.util.Objects;
 
 public class AgentProbe extends JavaProgramPatcher {
@@ -19,23 +18,28 @@ public class AgentProbe extends JavaProgramPatcher {
     public void patchJavaParameters(Executor executor, RunProfile configuration, JavaParameters javaParameters) {
 
         RunConfiguration runConfiguration = (RunConfiguration) configuration;
-Messages.showMessageDialog(runConfiguration.getProject(), "ceshi", "ceshi", Messages.getInformationIcon());
+
+        String message = "验证方式";
 
         boolean load = false;
         if (runConfiguration instanceof ApplicationConfiguration) {
+
+            message = "ApplicationConfiguration";
             // 决定是否加载
             boolean enableUseAgent = SqlPluginStore.getInstance(runConfiguration.getProject()).isEnableUseAgent();
             if (enableUseAgent) {
+                message = "enableUseAgent";
                 ConfigurationType type = runConfiguration.getType();
                 if (type instanceof ApplicationConfigurationType) {
+                    message = "ApplicationConfigurationType";
                     // 判断文件中是否有指定内容
                     PsiClass mainClass = ((ApplicationConfiguration) runConfiguration).getMainClass();
                     if (Objects.nonNull(mainClass)) {
-
+message = "mainClass";
                         if (mainClass.hasAnnotation("org.springframework.boot.autoconfigure.SpringBootApplication")
                                 || mainClass.hasAnnotation("org.springframework.cloud.client.SpringCloudApplication")) {
                             String agentCoreJarPath = PluginUtil.getAgentCoreJarPath();
-
+message = "agentCoreJarPath" +agentCoreJarPath;
                             if (StrUtil.isBlank(agentCoreJarPath)) {
                                 return;
                             }
