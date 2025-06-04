@@ -19,11 +19,10 @@ public class AgentProbe extends JavaProgramPatcher {
     public void patchJavaParameters(Executor executor, RunProfile configuration, JavaParameters javaParameters) {
 
         RunConfiguration runConfiguration = (RunConfiguration) configuration;
-Messages.showMessageDialog("你点击了 YES", "结果", Messages.getInformationIcon());
+Messages.showMessageDialog(runConfiguration.getProject(), "ceshi", "ceshi", Messages.getInformationIcon());
 
         boolean load = false;
         if (runConfiguration instanceof ApplicationConfiguration) {
-Messages.showMessageDialog("你点击了 YES", "结果", Messages.getInformationIcon());
             // 决定是否加载
             boolean enableUseAgent = SqlPluginStore.getInstance(runConfiguration.getProject()).isEnableUseAgent();
             if (enableUseAgent) {
