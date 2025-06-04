@@ -28,8 +28,9 @@ public class AgentProbe extends JavaProgramPatcher {
             // 决定是否加载
             boolean enableUseAgent = SqlPluginStore.getInstance(runConfiguration.getProject()).isEnableUseAgent();
             if (enableUseAgent) {
-                message = "enableUseAgent";
+               
                 ConfigurationType type = runConfiguration.getType();
+                 message = type.toString();
                 if (type instanceof ApplicationConfigurationType) {
                     message = "ApplicationConfigurationType";
                     // 判断文件中是否有指定内容
