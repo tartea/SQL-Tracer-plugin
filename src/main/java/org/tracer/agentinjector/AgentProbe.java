@@ -54,7 +54,7 @@ message = "agentCoreJarPath" +agentCoreJarPath;
                 }
             }
         }
-        SqlSettingsComponent.updateGlobalStatusText(load ? "sql tracer加载成功" : "sql tracer未加载");
+        SqlSettingsComponent.updateGlobalStatusText(message);
     }
 
 }
