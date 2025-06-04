@@ -14,7 +14,7 @@ repositories {
 // 配置 IntelliJ 插件参数
 intellij {
     version.set("2023.3.1") // 你可以根据需要修改为你的 IDEA 版本
-    type.set("IC")         // IC for Community Edition, IU for Ultimate
+    type.set("IU")         // IC for Community Edition, IU for Ultimate
     plugins.set(listOf("com.intellij.java"))
 }
 

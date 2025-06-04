@@ -12,7 +12,7 @@ public class SqlSettingsComponent {
     private final JBCheckBox enableFeatureCheckBox = new JBCheckBox("控制台打印日志");
     private final JBCheckBox enableUseAgentCheckBox = new JBCheckBox("开启sql tracer");
 
-    private final JBTextField statusTextField = new JBTextField(200);
+    private final JBTextField statusTextField = new JBTextField(70);
     private final JPanel panel;
 
     private static SqlSettingsComponent instance;
