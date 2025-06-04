@@ -10,7 +10,7 @@ import com.intellij.psi.PsiClass;
 import org.tracer.agentinjector.ui.SqlPluginStore;
 import org.tracer.agentinjector.ui.SqlSettingsComponent;
 import org.tracer.agentinjector.util.PluginUtil;
-
+import com.intellij.openapi.ui.Messages;
 import java.util.Objects;
 
 public class AgentProbe extends JavaProgramPatcher {
@@ -19,11 +19,11 @@ public class AgentProbe extends JavaProgramPatcher {
     public void patchJavaParameters(Executor executor, RunProfile configuration, JavaParameters javaParameters) {
 
         RunConfiguration runConfiguration = (RunConfiguration) configuration;
-
+Messages.showMessageDialog("你点击了 YES", "结果", Messages.getInformationIcon());
 
         boolean load = false;
         if (runConfiguration instanceof ApplicationConfiguration) {
-
+Messages.showMessageDialog("你点击了 YES", "结果", Messages.getInformationIcon());
             // 决定是否加载
             boolean enableUseAgent = SqlPluginStore.getInstance(runConfiguration.getProject()).isEnableUseAgent();
             if (enableUseAgent) {
