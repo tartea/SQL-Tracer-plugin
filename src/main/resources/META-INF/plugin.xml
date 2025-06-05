@@ -22,7 +22,7 @@
         <java.programPatcher implementation="org.tracer.agentinjector.AgentProbe"/>
 
         <toolWindow id="Sql Tracer" anchor="bottom"
-                    icon="AllIcons.Toolwindows.ToolWindowInternal"
+                    icon="/icons/tracer_icon.svg"
                     canCloseContents="false"
                     factoryClass="org.tracer.agentinjector.ui.SqlToolWindowFactory"/>
     </extensions>
