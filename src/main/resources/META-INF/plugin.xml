@@ -24,6 +24,7 @@
         <toolWindow id="Sql Tracer" anchor="bottom"
                     icon="/icons/tracer_icon.svg"
                     canCloseContents="false"
+                    secondary="true"
                     factoryClass="org.tracer.agentinjector.ui.SqlToolWindowFactory"/>
     </extensions>
 
