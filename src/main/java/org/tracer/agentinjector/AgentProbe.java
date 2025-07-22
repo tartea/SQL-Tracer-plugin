@@ -11,6 +11,7 @@ import com.intellij.execution.runners.JavaProgramPatcher;
 import com.intellij.psi.PsiClass;
 import org.tracer.agentinjector.ui.SqlPluginStore;
 import org.tracer.agentinjector.ui.SqlSettingsComponent;
+import org.tracer.agentinjector.util.JavaAgentParamHandler;
 import org.tracer.agentinjector.util.PluginUtil;
 
 import java.util.Objects;
@@ -39,8 +40,9 @@ public class AgentProbe extends JavaProgramPatcher {
                             return;
                         }
                         // 拼接控制台打印
-                        boolean currentState = SqlPluginStore.getInstance(runConfiguration.getProject()).isFeatureEnabled();
-                        agentCoreJarPath = agentCoreJarPath + "=outputToConsole=" + currentState;
+                        boolean outputToConsole = SqlPluginStore.getInstance(runConfiguration.getProject()).isOutputToConsoleEnabled();
+                        boolean fileOverlay = SqlPluginStore.getInstance(runConfiguration.getProject()).isFileOverlayEnabled();
+                        agentCoreJarPath = agentCoreJarPath + "=tracer=" + JavaAgentParamHandler.buildParam(outputToConsole,fileOverlay);
                         ParametersList vmParametersList = javaParameters.getVMParametersList();
                         vmParametersList.addParametersString("-javaagent:" + agentCoreJarPath);
                         load = true;

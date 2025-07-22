@@ -11,6 +11,7 @@ import java.awt.*;
 public class SqlSettingsComponent {
     private final JBCheckBox enableFeatureCheckBox = new JBCheckBox("控制台打印日志");
     private final JBCheckBox enableUseAgentCheckBox = new JBCheckBox("开启sql tracer");
+    private final JBCheckBox enableFileOverlayCheckBox = new JBCheckBox("日志文件覆盖");
 
     private final JBTextField statusTextField = new JBTextField(70);
     private final JPanel panel;
@@ -45,14 +46,23 @@ public class SqlSettingsComponent {
         verticalBox.add(enableUseAgentCheckBox);
 
         // 初始化 checkbox 状态
-        boolean currentState = SqlPluginStore.getInstance(project).isFeatureEnabled();
-        enableFeatureCheckBox.setSelected(currentState);
+        boolean outputToConsole = SqlPluginStore.getInstance(project).isOutputToConsoleEnabled();
+        enableFeatureCheckBox.setSelected(outputToConsole);
         // 添加监听器，保存状态
         enableFeatureCheckBox.addItemListener(e -> {
             boolean selected = e.getStateChange() == java.awt.event.ItemEvent.SELECTED;
-            SqlPluginStore.getInstance(project).setFeatureEnabled(selected);
+            SqlPluginStore.getInstance(project).setOutputToConsoleEnabled(selected);
         });
         verticalBox.add(enableFeatureCheckBox);
+
+        // 初始化 日志文件覆盖 状态
+        boolean fileOverlay = SqlPluginStore.getInstance(project).isFileOverlayEnabled();
+        enableFileOverlayCheckBox.setSelected(fileOverlay);
+        enableFileOverlayCheckBox.addItemListener(e -> {
+            boolean selected = e.getStateChange() == java.awt.event.ItemEvent.SELECTED;
+            SqlPluginStore.getInstance(project).setFileOverlayEnabled(selected);
+        });
+        verticalBox.add(enableFileOverlayCheckBox);
 
         JPanel textPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
         textPanel.setAlignmentX(Component.LEFT_ALIGNMENT);

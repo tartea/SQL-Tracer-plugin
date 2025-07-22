@@ -17,18 +17,25 @@ public final class SqlPluginStore implements PersistentStateComponent<SqlPluginS
         return project.getService(SqlPluginStore.class);
     }
 
-    public boolean isFeatureEnabled() {
+    public boolean isOutputToConsoleEnabled() {
         return sqlPluginState.outputToConsole;
+    }
+    public boolean isFileOverlayEnabled() {
+        return sqlPluginState.fileOverlay;
     }
     public boolean isEnableUseAgent() {
         return sqlPluginState.enableUseAgent;
     }
 
-    public void setFeatureEnabled(boolean enabled) {
+    public void setOutputToConsoleEnabled(boolean enabled) {
         sqlPluginState.outputToConsole = enabled;
     }
     public void setEnableUseAgent(boolean enabled) {
         sqlPluginState.enableUseAgent = enabled;
+    }
+
+    public void setFileOverlayEnabled(boolean selected) {
+        sqlPluginState.fileOverlay = selected;
     }
 
     @Override
@@ -40,4 +47,5 @@ public final class SqlPluginStore implements PersistentStateComponent<SqlPluginS
     public void loadState(@NotNull SqlPluginState.State state) {
         sqlPluginState.loadState(state);
     }
+
 }
