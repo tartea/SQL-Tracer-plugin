@@ -7,7 +7,7 @@ public class JavaAgentParamHandler {
 
 
     public static int buildParam(boolean outputToConsole, boolean fileOverlay) {
-        String binaryString = "000000" + convert(outputToConsole) + convert(fileOverlay);
+        String binaryString = "000000" + convert(fileOverlay) + convert(outputToConsole) ;
         return Integer.parseInt(binaryString, 2);
     }
 
